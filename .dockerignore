@@ -1,0 +1,23 @@
+database/database.*
+storage/logs/*
+storage/coverage
+storage/*log*xml
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/testing/*
+storage/framework/views/*
+storage/*.key
+*.cache
+.env
+
+# Git
+**/.gitignore
+
+# Docker
+.dockerignore
+
+# etc.
+**/*node_modules
+**/.DS_Store
+.idea
+vendor
