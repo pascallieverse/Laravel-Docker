@@ -33,13 +33,13 @@ ENV APP_NAME=$APP_NAME \
 #Install depencencies
 
 RUN apt-get update -y && \
-    apt-get install unzip git curl gnupg libzip-dev libmcrypt-dev libicu-dev cron supervisor libxml2-dev apt-transport-https -yq && \
+    apt-get install unzip git curl gnupg libzip-dev libonig-dev libicu-dev cron supervisor libxml2-dev apt-transport-https -yq && \
     a2enmod rewrite && \
     a2enmod expires && \
-    pecl install redis mcrypt-1.0.2 && \
-    docker-php-ext-enable redis mcrypt && \
+    pecl install redis && \
+    docker-php-ext-enable redis && \
     docker-php-ext-install mbstring intl zip pdo_mysql bcmath pcntl soap && \
-    docker-php-ext-configure zip --with-libzip && \
+    docker-php-ext-configure zip && \
     docker-php-ext-configure intl && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - &&  \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
@@ -54,7 +54,7 @@ WORKDIR /var/www/html
 COPY --chown=www-data:www-data . /var/www/html
 
 #Install composer
-RUN composer global require hirak/prestissimo && composer install --prefer-dist --no-dev --no-scripts --no-progress
+RUN composer install --prefer-dist --no-dev --no-scripts --no-progress
 
 #Install npm for building frontend and build frontend
 RUN yarn install && \
